@@ -31,7 +31,7 @@ class ModelPaths:
         }
 
         self.grounding_dino = {
-            'config': './GroundingDINO/groundingdino/config/GroundingDINO_SwinT_OGC.py',
+            'config': './configs/swint_ogc.py',
             'weight': self.models_dir / 'groundingdino_swint_ogc.pth'
         }
 
@@ -383,12 +383,12 @@ if __name__ == "__main__":
 
     # Advanced usage with custom settings
     results = matte.process_image(
-        image_path='path/to/image.jpg',
+        image_path='1.png',
         output_path='output_folder',
         object_prompt="person",  # Detect a cat instead of a person
         erode_kernel_size=5,  # Sharper edges
         dilate_kernel_size=15,  # Softer blending
-        background_paths=['background.jpg']  # Custom background
+        background_paths=None  # Custom background
     )
 
     # Access the results
