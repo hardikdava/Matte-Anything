@@ -62,12 +62,12 @@ class BackgroundGenerator:
         return image
 
     @staticmethod
-    def generate_color_background(height, width, color):
+    def generate_color_background(height, width, color=(255, 255, 255)):
         """Generate a random color background"""
         color_bg = np.zeros((height, width, 3), dtype=np.uint8)
-        color_bg[:, :, 0] = color[0]
-        color_bg[:, :, 1] = color[1]
-        color_bg[:, :, 2] = color[2]
+        color_bg[:, :, 0] = int(color[0])
+        color_bg[:, :, 1] = int(color[1])
+        color_bg[:, :, 2] = int(color[2])
         return color_bg
 
 
@@ -321,6 +321,7 @@ class MatteAnything:
 
         # Create checkerboard background
         if background_color:
+            background_color = tuple(map(float, background_color.split(',')))
             background = self.bg_generator.generate_color_background(input_x.shape[0], input_x.shape[1],
                                                                      background_color)
         else:
