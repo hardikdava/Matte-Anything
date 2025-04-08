@@ -8,5 +8,5 @@ build:
     - cd detectron2 && pip install -e .
 
 # predict.py defines how predictions are run on your model
-predict: "predict.py:Predictor"
+predict: "predict.py:CogPredictor"
 image: "r8.im/graswald/matt-anything"

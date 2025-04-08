@@ -42,7 +42,7 @@ class CogPredictor(BasePredictor):
         tmp_output_path = os.path.join("output", str(uuid4()))
         """Run a single prediction on the model"""
         _ = self.predictor.process_image(
-            image_path=image,
+            image_path=str(image),
             output_path=tmp_output_path,
             object_prompt=prompt,  # Detect a cat instead of a person
             erode_kernel_size=5,  # Sharper edges
