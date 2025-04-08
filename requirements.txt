@@ -1,4 +1,7 @@
-torch==2.0.0
+rf-groundingdino
+git+https://github.com/facebookresearch/segment-anything.git
+git+https://github.com/facebookresearch/detectron2.git
+torch
 torchvision
 tensorboard
 timm==0.5.4
