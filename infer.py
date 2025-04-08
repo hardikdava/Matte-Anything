@@ -61,6 +61,15 @@ class BackgroundGenerator:
 
         return image
 
+    @staticmethod
+    def generate_color_background(height, width, color):
+        """Generate a random color background"""
+        color_bg = np.zeros((height, width, 3), dtype=np.uint8)
+        color_bg[:, :, 0] = color[0]
+        color_bg[:, :, 1] = color[1]
+        color_bg[:, :, 2] = color[2]
+        return color_bg
+
 
 class TrimapGenerator:
     """Class for generating trimaps for matting"""
@@ -158,7 +167,8 @@ class MatteAnything:
                       tr_caption="glass,lens,crystal,diamond,bubble,bulb,web,grid",
                       tr_box_threshold=0.5,
                       tr_text_threshold=0.25,
-                      background_paths=None):
+                      background_paths=None,
+                      background_color=None):
         """
         Process an image to extract the subject with alpha matting
 
@@ -310,7 +320,11 @@ class MatteAnything:
         alpha = alpha.detach().cpu().numpy()
 
         # Create checkerboard background
-        background = self.bg_generator.generate_checkerboard(input_x.shape[0], input_x.shape[1], 8)
+        if background_color:
+            background = self.bg_generator.generate_color_background(input_x.shape[0], input_x.shape[1],
+                                                                     background_color)
+        else:
+            background = self.bg_generator.generate_checkerboard(input_x.shape[0], input_x.shape[1], 8)
 
         # Calculate foreground with alpha blending
         foreground_alpha = input_x * np.expand_dims(alpha, axis=2).repeat(3, 2) / 255 + \
@@ -390,8 +404,3 @@ if __name__ == "__main__":
         dilate_kernel_size=15,  # Softer blending
         background_paths=None  # Custom background
     )
-
-    # Access the results
-    alpha_matte = results['alpha']
-    foreground = results['foreground_alpha']
-    composites = results['composites']

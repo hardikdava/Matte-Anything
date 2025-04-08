@@ -1,6 +1,7 @@
+wget
 rf-groundingdino
 git+https://github.com/facebookresearch/segment-anything.git
-git+https://github.com/facebookresearch/detectron2.git
+git+https://github.com/facebookresearch/detectron2.git@ff53992b1985b63bd3262b5a36167098e3dada02
 torch
 torchvision
 tensorboard
@@ -12,3 +13,5 @@ wget
 scikit-image
 gradio==3.34.0
 fairscale
+pillow==9.5.0
+supervision

@@ -1,0 +1,12 @@
+build:
+  gpu: true
+  cuda: "12.1"
+  python_version: "3.11"
+  python_requirements: requirements.txt
+  run:
+    - git clone https://github.com/facebookresearch/detectron2.git
+    - cd detectron2 && pip install -e .
+
+# predict.py defines how predictions are run on your model
+predict: "predict.py:Predictor"
+image: "r8.im/graswald/matt-anything"
